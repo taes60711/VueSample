@@ -25,7 +25,7 @@ export default {
       console.log(userClass.getUser());
     },
 
-    //firebase
+    //firebase get
     get: async function () {
       const userRef = firesotre.collection("users");
       const userDoc = await userRef.get();

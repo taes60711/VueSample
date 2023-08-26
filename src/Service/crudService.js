@@ -73,7 +73,7 @@ export const deleteData = async function () {
     });
     console.log(getAllId);
     
-    //ドキュメント存在場合インデスク０のデータ更新する
+    //ドキュメント存在場合インデスク０のデータ削除する
     if (getAllId) {
       await userRef.doc(getAllId[0]).delete();
     }else{

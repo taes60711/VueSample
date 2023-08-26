@@ -1,14 +1,22 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button @click="get()">FireBase</button>
+    <button @click="addData()">firebase_Create</button>
+    <br />
+    <button @click="getData()">firebase_Read</button>
+    <br />
+    <button @click="updateData()">firebase_Update</button>
+    <br />
+    <button @click="deleteData()">firebase_Delete</button>
+    <br />
+
     <button @click="click()">Class</button>
   </div>
 </template>
 
 <script>
-import {firesotre} from "/src/Service/firebaseService.js";
 import { users } from "./HelloWorldClass.js";
+import { getData, setData, updateData, deleteData} from "/src/Service/crudService.js";
 
 export default {
   name: "HelloWorld",
@@ -16,47 +24,48 @@ export default {
     msg: String,
   },
   methods: {
-
-    //class
+    //class 
     click() {
       const userClass = new users();
       console.log(userClass.getUser());
-      console.log(userClass.setUser( { Id: "asdsad", born: "boqweqwrn", first: "fisadasdrst", last: "laasdsadst" }))
+      console.log(
+        userClass.setUser({
+          Id: "classedId",
+          born: "classedborn",
+          first: "classedfirst",
+          last: "classedlast",
+        })
+      );
       console.log(userClass.getUser());
     },
+    //crudService.js  setData()
+    addData: async function () {
+      await setData()
+        .then(() => console.log("add Sucessfull"))
+        .catch((e) => console.error(e));
+    },
 
-    //firebase get
-    get: async function () {
-      const userRef = firesotre.collection("users");
-      const userDoc = await userRef.get();
+    //crudService.js  getData()
+    getData: async function () {
+      await getData().catch((e) => console.error(e));
+    },
 
-      //リストに全データ取得する
-      let getAllData = userDoc.docs.map((doc) => {
-        return doc.data();
-      });
-      console.log(getAllData);
+     //crudService.js  updateData()
+     updateData: async function () {
+      await updateData()
+      .then(() => console.log("update Sucessfull"))
+      .catch((e) => console.error(e));
+    },
 
-      //リストに全ID取得する
-      let getAllId = userDoc.docs.map((doc) => {
-        return doc.id;
-      });
-      console.log(getAllId);
-
-      //IDでデータを取得する
-      let getById = [];
-      for (let i = 0; i < getAllId.length; i++) {
-        const getDataById = await userRef.doc(getAllId[i]).get();
-        if (getDataById.exists) {
-          getById.push(getDataById.data());
-        }
-      }
-      console.log(getById);
+     //crudService.js  deleteData()
+     deleteData: async function () {
+      await deleteData()
+      .then(() => console.log("delete Sucessfull"))
+      .catch((e) => console.error(e));
     },
   },
 };
 </script>
 
-
 <style scoped>
-
 </style>

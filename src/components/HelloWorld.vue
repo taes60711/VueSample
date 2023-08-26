@@ -1,26 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button @click="getData()">test</button>
+    <button @click="get()">FireBase</button>
+    <button @click="click()">Class</button>
   </div>
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAcV_uQSFmZSRabSXUppAK4qHhZJ1v_vVg",
-  authDomain: "vuesample-d1c56.firebaseapp.com",
-  projectId: "vuesample-d1c56",
-  storageBucket: "vuesample-d1c56.appspot.com",
-  messagingSenderId: "44844191019",
-  appId: "1:44844191019:web:825bf9d428f5d90613c96e",
-  measurementId: "G-XVNJ9B517B",
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore(); 
+import {firesotre} from "/src/Service/firebaseService.js";
+import { users } from "./HelloWorldClass.js";
 
 export default {
   name: "HelloWorld",
@@ -28,36 +16,47 @@ export default {
     msg: String,
   },
   methods: {
-    click(message) {
-      alert(message);
+
+    //class
+    click() {
+      const userClass = new users();
+      console.log(userClass.getUser());
+      console.log(userClass.setUser( { Id: "asdsad", born: "boqweqwrn", first: "fisadasdrst", last: "laasdsadst" }))
+      console.log(userClass.getUser());
     },
-    getData: async function () {
-      const userRef = db.collection("users");
-      const userDoc = await userRef.doc("V0NxTrS3IMwD4GSwK6RB").get();
-      if (userDoc.exists) {
-        console.log(userDoc.id);
-        console.log(userDoc.data());
-        console.log(userDoc.get("title"));
+
+    //firebase
+    get: async function () {
+      const userRef = firesotre.collection("users");
+      const userDoc = await userRef.get();
+
+      //リストに全データ取得する
+      let getAllData = userDoc.docs.map((doc) => {
+        return doc.data();
+      });
+      console.log(getAllData);
+
+      //リストに全ID取得する
+      let getAllId = userDoc.docs.map((doc) => {
+        return doc.id;
+      });
+      console.log(getAllId);
+
+      //IDでデータを取得する
+      let getById = [];
+      for (let i = 0; i < getAllId.length; i++) {
+        const getDataById = await userRef.doc(getAllId[i]).get();
+        if (getDataById.exists) {
+          getById.push(getDataById.data());
+        }
       }
+      console.log(getById);
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

@@ -1,18 +1,19 @@
 <template>
-  <div>
-   MainPage
-  </div>
-   <button @click="toHelloWorld">toHelloWorld</button>
+  <div>MainPage</div>
+  <button @click="toHelloWorld">toHelloWorld</button>
 </template>
 
 <script>
 export default {
   name: "MainPage",
-   methods: {
+  methods: {
     toHelloWorld: function () {
-      this.$router.push({ name: 'HelloWorld' })
-    }
-  }
+      this.$router.push({
+        name: "HelloWorld",
+        params: { user: "taro", age: 33 },
+      });
+    },
+  },
 };
 </script>
 

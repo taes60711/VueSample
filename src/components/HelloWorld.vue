@@ -5,15 +5,17 @@
 </template>
 
 <script>
-
 export default {
   name: "HelloWorld",
-
+  mounted:function (){
+    console.log(this.$route.params)
+  },
   methods: {
     toMainPage: function () {
-      this.$router.push({ name: "MainPage" });
+      this.$router.push({
+        name: "MainPage",
+      });
     },
-
   },
 };
 </script>

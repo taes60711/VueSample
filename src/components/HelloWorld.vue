@@ -15,53 +15,67 @@
 </template>
 
 <script>
-import { users } from "./HelloWorldClass.js";
-import { getData, setData, updateData, deleteData} from "/src/Service/crudService.js";
+import { crudService } from "/src/Service/crudService.js";
+import { users } from "/src/Components/HelloWorldClass.js";
 
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
   },
+
   methods: {
-    //class 
+    //class
     click() {
       const userClass = new users();
+
       console.log(userClass.getUser());
-      console.log(
-        userClass.setUser({
-          Id: "classedId",
-          born: "classedborn",
-          first: "classedfirst",
-          last: "classedlast",
-        })
-      );
+
+      userClass.setUser({
+        Id: "classedId",
+        born: "classedborn",
+      });
+      console.log(userClass.getUser());
+      userClass.setUser({
+        Id: "classedId",
+        born: "classedborn",
+        first: "classedfirst",
+        last: "classedlast",
+      });
       console.log(userClass.getUser());
     },
+
     //crudService.js  setData()
     addData: async function () {
-      await setData()
+      const crud = new crudService();
+      await crud
+        .setData()
         .then(() => console.log("add Sucessfull"))
         .catch((e) => console.error(e));
     },
 
     //crudService.js  getData()
     getData: async function () {
-      await getData().catch((e) => console.error(e));
+      const crud = new crudService();
+      await crud.getData().catch((e) => console.error(e));
     },
 
-     //crudService.js  updateData()
-     updateData: async function () {
-      await updateData()
-      .then(() => console.log("update Sucessfull"))
-      .catch((e) => console.error(e));
+    //crudService.js  updateData()
+    updateData: async function () {
+      const crud = new crudService();
+      await crud
+        .updateData()
+        .then(() => console.log("update Sucessfull"))
+        .catch((e) => console.error(e));
     },
 
-     //crudService.js  deleteData()
-     deleteData: async function () {
-      await deleteData()
-      .then(() => console.log("delete Sucessfull"))
-      .catch((e) => console.error(e));
+    //crudService.js  deleteData()
+    deleteData: async function () {
+      const crud = new crudService();
+      await crud
+        .deleteData()
+        .then(() => console.log("delete Sucessfull"))
+        .catch((e) => console.error(e));
     },
   },
 };

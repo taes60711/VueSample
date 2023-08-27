@@ -31,9 +31,12 @@ export class crudService {
 
     //条件で検索
     const filterData = await this.userRef.where("Id", "==", "0608").get();
-    filterData.forEach((result) => {
-      console.log(result.data());
-    });
+    if(filterData){
+      filterData.forEach((result) => {
+        console.log(result.data());
+      });
+    }
+    
 
     //IDでデータを取得する
     const getById = [];

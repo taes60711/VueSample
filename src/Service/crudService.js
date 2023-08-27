@@ -1,5 +1,5 @@
 import { firesotre } from "/src/Service/firebaseService.js";
-import { users } from "/src/Components/HelloWorldClass.js";
+import { users } from "/src/Components/UserClass.js";
 
 
 

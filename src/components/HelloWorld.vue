@@ -9,8 +9,10 @@
     <br />
     <button @click="deleteData()">firebase_Delete</button>
     <br />
-
     <button @click="click()">Class</button>
+    <br />
+    <br />
+    <button @click="toMainPage">toMainPage</button>
   </div>
 </template>
 
@@ -25,6 +27,10 @@ export default {
   },
 
   methods: {
+
+    toMainPage: function () {
+      this.$router.push({ name: "MainPage" });
+    },
     //class
     click() {
       const userClass = new users();

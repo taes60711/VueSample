@@ -10,7 +10,10 @@ export default {
   name: "MainPage",
    methods: {
     toHelloWorld: function () {
-      this.$router.push({ name: 'HelloWorld' })
+      this.$router.push({
+        name: "HelloWorld",
+        params: { user: "taro", age: 33 },
+      });
     }
   }
 };

@@ -25,9 +25,10 @@ export default {
   props: {
     msg: String,
   },
-
+ mounted: function () {
+      console.log(this.$route.params);
+    },
   methods: {
-
     toMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },

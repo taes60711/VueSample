@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HelloWorld from "./Components/HelloWorld.vue";
-import MainPage from "./Components/MainPage/MainPage.vue";
+// @ts-ignore
+import HelloWorld from "./components/HelloWorld.vue";
+// @ts-ignore
+import MainPage from "./components/MainPage/MainPage.vue";
 
 const routes = [
     {

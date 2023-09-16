@@ -17,8 +17,10 @@
 </template>
 
 <script>
-import { crudService } from "/src/Service/crudService.js";
-import { users } from "/src/Components/HelloWorldClass.js";
+import { crudService } from '@/Service/crudService';
+import { users } from './HelloWorldClass';
+
+
 
 export default {
   name: "HelloWorld",
